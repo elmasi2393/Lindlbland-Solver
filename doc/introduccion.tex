@@ -1,0 +1,51 @@
+\section{Introducción}
+Los sistemas cuánticos deben entenderse como sistemas abiertos debido a su inevitable interacción con el entorno, que influye significativamente en su dinámica. Dado que el aislamiento perfecto es imposible y la descripción microscópica completa del entorno resulta impráctica o irrelevante, la teoría de sistemas cuánticos abiertos se vuelve esencial. Este enfoque simplifica el análisis mediante herramientas probabilísticas, permitiendo tratar sistemas complejos con múltiples grados de libertad y enfocándose en información relevante para describir su evolución.
+
+Cuando se tiene un sistema cuántico cerrado, según la ecuación de Schrödinger los autoestados del Hamimtoniano son estados estacionarios y la evolución temporal es unitaria, por lo tanto solo agregan una fase global a los estados pero no produce cambios a otros estados. A su vez, cuando se quieren describir situaciones más complejas considerando estados mixtos, se utiliza la matriz de densidad \cite{blum2012density}. Esta matriz es una generalización de los estados puros, y se puede escribir como 
+
+\begin{equation}    \label{eq: dm}
+    \rho = \sum_i p_i |\psi_i\rangle \langle \psi_i|
+\end{equation} 
+
+\noindent donde \(p_i\) es la probabilidad de que el sistema esté en el estado \(|\psi_i\rangle\). Esta probabilidad no es cuántica, sino que es una probabilidad clásica que surge de nuestro desconocimiento del estado cuántico. Notar que esta probabilidad es diferente a la probabilidad cuántica, proveniente de una superposición de estados.
+
+Los elementos de la diagonal de la \(\rho\) se conocen como \textbf{poblaciones} y los elementos fuera de la diagonal como \textbf{coherencias}. Notar que las coherencias indican superposición entre estados cuánticos. Además, se puede demostrar que la matriz de densidad (Ecuación \ref{eq: dm}) es hermítica y tiene traza unitaria \cite{blum2012density}.
+
+% Por definición, se tienen estados puros $\iff Tr(\rho^2)=1$.
+
+La evolución temporal de la matriz de densidad sigue la ecuación de Liouville-von Neumann dada por \cite{blum2012density,BRE02}
+
+\begin{equation} \label{eq: Liouville-von Neumann}
+    \frac{d\rho}{dt} = \frac{1}{i\hbar}[\mathcal{H},\rho]
+\end{equation}
+
+\noindent donde \(\mathcal{H}\) es el Hamiltoniano del sistema. Notar que esta evolución temporal es unitaria, por lo tanto los autoestados del Hamiltoniano son estados estacionarios.
+
+Si consideramos una situación más realista, en donde el sistema (S) se encuentra embebido en un entorno (E), entonces la matriz de densidad del universo (U) se puede escribir como
+
+\begin{equation} \label{eq: dm_u}
+    \rho_u = \rho_s \otimes \rho_e,
+\end{equation}
+
+\noindent donde \(\rho_s \in \mathcal{H}_s\) y \(\rho_e \in \mathcal{H}_e\) son las matrices de densidad del sistema y del entorno respectivamente en sus respectivos espacios de Hilbert, por lo tanto, \(\rho_u \in \mathcal{H}_s \otimes \mathcal{H}_e = \mathcal{H}_u\).
+
+La evolución temporal de la matriz de densidad del universo es unitaria y se puede obtener mediante la Ecuación \ref{eq: Liouville-von Neumann} como
+
+\begin{equation} \nonumber
+    \partial_t \rho_u =  \frac{1}{i\hbar} [\mathcal{H}, \rho_u].
+\end{equation}
+
+Como se quiere obtener la evolución temporal de la matriz de densidad del sistema, se tiene que realizar la traza parcial sobre el entorno, es decir \(\rho_s (t) = \text{tr}_e (\rho_u (t))\).  Si se escribe el Hamiltoniano del universo como el producto tensorial de los Hamiltonianos del sistema y del entorno más un término de interacción, se puede demostrar que la evolución temporal de la matriz de densidad del sistema es \cite{BRE02}
+
+\begin{align} \label{eq: Lindblad}
+    \rho_s (t) &= \frac{1}{i\hbar} \left[ \mathcal{H}_s, \rho_s \right] \nonumber \\
+    &\quad + \sum_n \left(C_n \rho C_n^\dagger - \frac{1}{2}\left\{C_nC_n^\dagger, \rho \right\} \right)
+\end{align}
+
+\noindent donde \(C_n\) son llamados operadores de colapso o de Lindbland. La ecuación \ref{eq: Lindblad} es la ecuación de Lindblad, que describe la evolución temporal de la matriz de densidad del sistema en presencia de un entorno.
+
+Los operadors de colapso son operadores que describen la interacción del sistema con el entorno. Si bien el entorno puede ser muy complejo o contener infinitos grados de libertad, puede suponerse una iteracción efectiva dada por un conjunto finito de operadores. Usualmente, los operadores de colapso se escriben como
+\(C_n = \sqrt{\gamma_n} O_n\), donde \(\gamma_n\) es una tasa efectiva de colapso y \(O_n\) es un operador del sistema.
+
+En este trabajo se resuelve numéricamente la ecuación de Lindblad para sistemas de dos niveles, conocidos como qubits, de gran relevancia en la computación cuántica. La sección \ref{sec: metodologia} detalla el algoritmo empleado para la resolución numérica. En la sección \ref{sec: one_qubit}, se analizan los efectos de relajación, excitación y coherencia en un qubit. Posteriormente, en la sección \ref{sec: two_qubits}, se estudia la evolución temporal de dos qubits entrelazados, incluyendo la evolución de la concurrencia definida por Wootters \cite{Wootters} y el fenómeno de ``muerte súbita del entrelazamiento'' (Entanglement Sudden Death, ESD) \cite{ESD}. Finalmente, en la sección \ref{sec: conclusion}, se resumen los resultados obtenidos y su relevancia en el contexto del trabajo. 
+

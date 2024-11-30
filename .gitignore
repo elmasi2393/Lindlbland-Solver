@@ -1,0 +1,13 @@
+*.dSYM
+*.DS_Store
+
+# Latex extension files
+*.aux
+*.out
+*.log
+*.synctex.gz
+*.run.xml
+*.bbl
+*.blg
+*.bcf
+*.fls

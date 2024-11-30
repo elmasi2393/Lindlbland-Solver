@@ -1,0 +1,125 @@
+% --------------- PLANTILLA MAXI (GOD) -----------------
+\documentclass[11pt, twocolumn,a4paper]{article}
+
+\usepackage[latin1,utf8]{inputenc}
+\usepackage{verbatim}
+\usepackage{minted} 
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{stfloats}
+\usepackage{enumerate}
+\usepackage{graphics,graphicx,xcolor}
+\usepackage{subfig}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{caption}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{blindtext}
+\usepackage{multicol}
+\usepackage{geometry}
+\usepackage{lipsum}
+\usepackage{csquotes}
+\usepackage[titletoc,toc,page]{appendix}
+
+%paquete para referencias
+% \usepackage[backend=biber]{biblatex} % 
+% Hay que arreglar lo de las citas
+\usepackage[backend=bibtex, style=nature]{biblatex}
+
+\usepackage{titling} % Paquete para personalizar título del documento
+
+\usepackage{authblk}  % Paquete para personalizar autores del documento
+\renewcommand\Authand{ y } % Reemplazar 'and' con 'y'
+\newgeometry{bottom=3cm, top=2cm, left=3cm, right=3cm}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = blue, %Colour for external hyperlinks
+  linkcolor    = black, %Colour of internal links
+  citecolor   = black %Colour of citations
+}
+\usepackage{caption} % Modifico las captions
+\captionsetup{
+    font={footnotesize}, % Smaller font size (footnotesize) 
+    labelfont={bf}       % Bold X)
+}
+
+\usepackage{abstract}
+\renewcommand{\abstractname}{} % Elimina el título del abstract
+\setlength{\absleftindent}{0pt} % Elimina el margen izquierdo
+\setlength{\absrightindent}{0pt} % Elimina el margen derecho
+
+%paquete para unidades
+\usepackage{siunitx}
+% seteo punto como separador decimal
+\AtBeginDocument{\decimalpoint}
+
+
+%% Paquetes de la AMS
+\usepackage{amsmath, amsthm, amsfonts, amssymb}
+%componentes de texto
+\usepackage{textcomp}
+\usepackage{footmisc}
+
+
+% Personaliza título del documento
+% Personaliza título del documento
+\pretitle{\begin{center}\large}
+  \posttitle{\par\vspace{0.1em}\end{center}} % reduce vertical space after title
+  \preauthor{\begin{center}\normalsize \lineskip 0.1em \begin{tabular}[t]{c}}
+  \postauthor{\end{tabular}\par\end{center}}
+  \predate{\begin{center}\normalsize}
+  \postdate{\par\end{center}}
+
+\usepackage{titlesec}
+\titleformat{\section}
+  {\normalfont\large\bfseries\centering} % make titles bold and large
+  {\Roman{section}.} % number sections with Roman numerals
+  {1em}
+  {\MakeUppercase}
+
+\titleformat{\subsection}
+  {\normalfont\normalsize\bfseries\centering} % make subtitles bold and normal size
+  {\Alph{subsection}.} % number subsections with letters
+  {1em}
+  {}
+
+\renewcommand{\thesubsection}{\thesection\Alph{subsection}}
+\renewcommand{\abstractname}{} % remove abstract title
+
+% ------------------- TITULO ----------------------
+\title{\textbf{Ecuación de Lindbland}}
+% \title{\textbf{Imágenes selectivas por resonancia magnética nuclear de señales intra y extra axonales como un nuevo paradigma de diagnóstico en cerebro}}
+
+\author[1]{\textbf{Maximiliano Gatto}}
+\affil[1]{Instituto Balseiro (UNCuyo - CNEA) - Bariloche, Río Negro, Argentina}
+\affil[1]{\href{mailto:maximiliano.gatto@ib.edu.ar}{maximiliano.gatto@ib.edu.ar}}
+
+\date{\today\vspace{-1.3em}}
+
+\bibliography{referencia.bib}   %referencias
+
+\begin{document}
+\twocolumn[
+  \begin{@twocolumnfalse}
+    \maketitle
+    \begin{center}
+      \begin{minipage}{0.9\textwidth}
+        \footnotesize 
+        lorem it
+      \end{minipage}
+    \end{center}
+  \end{@twocolumnfalse}
+]
+
+% --------------- INTRODUCCION ----------------------
+\input{introduccion.tex}
+\input{metodologia.tex}
+\input{resultados y discusiones.tex}
+\input{conclusion.tex}
+
+\printbibliography
+
+
+\end{document}
