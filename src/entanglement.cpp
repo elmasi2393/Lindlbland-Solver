@@ -41,36 +41,12 @@ class C_phi : public QobjEvo {
         QuantumMatrix operator_a, operator_b;
 };
 
-// class C_phi_global : public QobjEvo {
-//     public:
-//         C_phi_global(const double gamma_min) : gamma_min(gamma_min), operator_a(tensor_product(sigma_z, sigma_0)) , operator_b(tensor_product(sigma_0, sigma_z)) {}
-//         QuantumMatrix operator()(const double t, const QuantumMatrix &variables) const override {
-//             return sqrt(gamma_min) * (operator_a + operator_b);
-//         }
-//     private:
-//         double gamma_min;
-//         QuantumMatrix operator_a, operator_b;
-// };
-
-// class C_minnus : public QobjEvo {
-//     public:
-//         C_minnus(const double gamma_min_1, const double gamma_min_2) : gamma_min_1(gamma_min_1), gamma_min_2(gamma_min_2), operator_a(tensor_product(sigma_m, sigma_0)) , operator_b(tensor_product(sigma_0, sigma_m)) {}
-//         QuantumMatrix operator()(const double t, const QuantumMatrix &variables) const override {
-//             return sqrt(gamma_min_1) * operator_a + sqrt(gamma_min_2) * operator_b;
-//         }
-//     private:
-//         double gamma_min_1, gamma_min_2;
-//         QuantumMatrix operator_a, operator_b;
-// };
-
 
 int main(){
     double wq1 = 1.0;
     double wq2 = 1.0;
     double gamma_phi_1 = 0.1;
     double gamma_phi_2 = 0.1;
-
-    // QuantumVector phi_plus = bell_state("00");
 
     vector<double> diag = {1.0/3.0, 1.0/6.0, 1.0/6.0, 1.0/3.0};
     QuantumValue w = 1.0/3.0;
