@@ -7,9 +7,6 @@
 #include <chrono>
 #include <thread>
 
-// #include <utils.cpp>    // Sobrecarga de operadores necesarios
-// #include <Qobj.cpp>     // Definición de matrices y funciones de matrices
-
 #include <Eigen/Dense>
 #include <unsupported/Eigen/KroneckerProduct>
 
@@ -42,28 +39,6 @@ class C_phi : public QobjEvo {
         double gamma_min_1, gamma_min_2;
         QuantumMatrix operator_a, operator_b;
 };
-
-// class C_phi_global : public QobjEvo {
-//     public:
-//         C_phi_global(const double gamma_min) : gamma_min(gamma_min), operator_a(tensor_product(sigma_z, sigma_0)) , operator_b(tensor_product(sigma_0, sigma_z)) {}
-//         QuantumMatrix operator()(const double t, const QuantumMatrix &variables) const override {
-//             return sqrt(gamma_min) * (operator_a + operator_b);
-//         }
-//     private:
-//         double gamma_min;
-//         QuantumMatrix operator_a, operator_b;
-// };
-
-// class C_minnus : public QobjEvo {
-//     public:
-//         C_minnus(const double gamma_min_1, const double gamma_min_2) : gamma_min_1(gamma_min_1), gamma_min_2(gamma_min_2), operator_a(tensor_product(sigma_m, sigma_0)) , operator_b(tensor_product(sigma_0, sigma_m)) {}
-//         QuantumMatrix operator()(const double t, const QuantumMatrix &variables) const override {
-//             return sqrt(gamma_min_1) * operator_a + sqrt(gamma_min_2) * operator_b;
-//         }
-//     private:
-//         double gamma_min_1, gamma_min_2;
-//         QuantumMatrix operator_a, operator_b;
-// };
 
 
 void  run_simulation(const vector<double> system_parameters, const vector<double> time_limits, const double step, const QuantumMatrix &p0, const string path2save){
@@ -100,21 +75,23 @@ void  run_simulation(const vector<double> system_parameters, const vector<double
 }
 
 int main(){
+    // Definicion de variables del sistema y operadores de colapso
     double wq1 = 1.0;
     double wq2 = 1.0;
     double gamma_phi_1 = 0.1;
     double gamma_phi_2 = 0.1;
 
-    vector<double> parameters = {wq1, wq2, gamma_phi_1, gamma_phi_2};
-
+    // Acomodo los parámetros y los estados de Bell en vectores para pasarle a la simulación
+    vector<double> parameters = {wq1, wq2, gamma_phi_1, gamma_phi_2}; 
     vector<QuantumVector> bell_states = {bell_state("00"), bell_state("01"), bell_state("10"), bell_state("11")};
 
+    // defino escala temporal
     vector<double> time_limits = {0, 10};
     double h = 0.001;
 
-    vector<thread> threads;
+    vector<thread> threads; // hilos para ejecución en paralelo
 
-    for(int i = 0; i < bell_states.size(); i++){
+    for(int i = 0; i < bell_states.size(); i++){    // crea los hilos y la ruta donde guardar los resulatdos
         string path2save = "../results/results_bell_state_" + to_string(i/2) + to_string(i%2) + ".csv";
         threads.push_back(thread(run_simulation, parameters, time_limits, h, bell_states[i], path2save));
     }

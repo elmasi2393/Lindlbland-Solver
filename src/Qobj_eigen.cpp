@@ -1,15 +1,11 @@
-
 #include <iostream>
 #include <vector>
 #include <fstream>
 #include <string>
 #include <complex>
-
-// #include <utils.cpp>    // Sobrecarga de operadores necesarios
-// #include <Qobj.cpp>     // Definición de matrices y funciones de matrices
-
 #include <Eigen/Dense>
 #include <unsupported/Eigen/KroneckerProduct>
+
 #define hbar 1.0
 
 using namespace std;
@@ -52,25 +48,7 @@ QuantumMatrix conmutator(const QuantumMatrix &q1, const QuantumMatrix &q2){
 }
 
 // Función para el producto tensorial
-QuantumMatrix tensor_product(const QuantumMatrix& A, const QuantumMatrix& B) {
-    // int rows_A = A.rows();
-    // int cols_A = A.cols();
-    // int rows_B = B.rows();
-    // int cols_B = B.cols();
-
-    // // Crear una matriz de tamaño (rows_A * rows_B) x (cols_A * cols_B)
-    // QuantumMatrix result(rows_A * rows_B, cols_A * cols_B);
-
-    // // Rellenar la matriz resultante
-    // for (int i = 0; i < rows_A; ++i) {
-    //     for (int j = 0; j < cols_A; ++j) {
-    //         // El valor A(i, j) se multiplica por toda la matriz B
-    //         result.block(i * rows_B, j * cols_B, rows_B, cols_B) = A(i, j) * B;
-    //     }
-    // }
-    // return result;
-    return kroneckerProduct(A, B);
-}
+QuantumMatrix tensor_product(const QuantumMatrix& A, const QuantumMatrix& B) {return kroneckerProduct(A, B);}
 
 
 // ---------------------- Ecuación de Lindblad para el Solver -----------------------------------------------
@@ -177,6 +155,7 @@ QuantumVector basis(const int N, const int i){
     return basis_vector;
 }
 
+// Transforma el ket a una matriz de densidad, que es la forma que necesita el solver
 QuantumMatrix ket2dm(const QuantumVector &ket){
     if (ket.rows() == 0){
         cout << "Error: el vector de estado no puede ser vacío" << endl;
@@ -194,7 +173,7 @@ QuantumMatrix ket2dm(const QuantumVector &ket){
 }
 
 
-// Definimos la función de estado de Bell optimizada
+// Estados de Bell
 QuantumVector bell_state(const std::string &type) {
     QuantumVector bell = QuantumVector::Zero(4);
     const double norm_factor = 1.0 / std::sqrt(2.0);
@@ -222,7 +201,7 @@ QuantumVector bell_state(const std::string &type) {
     
     return bell;
 }
-//T. Yu, J.H. Eberly / Optics Communications 264 (2006) 393–397
+//Matriz de la forma estandar para procesos de ESD según T. Yu, J.H. Eberly / Optics Communications 264 (2006) 393–397
 QuantumMatrix standar_death_form(const vector<double> &diag, const QuantumValue w, const QuantumValue z, const double atol = 1e-6){
     if (diag.size() != 4){
         cout << "Error: la matriz de muerte debe ser de tamaño 4" << endl;
