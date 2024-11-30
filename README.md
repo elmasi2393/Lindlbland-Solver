@@ -26,9 +26,9 @@ Este proyecto utiliza la biblioteca Eigen para las operaciones matriciales y los
 Si aún no tienes Eigen, puedes instalarlo de la siguiente manera:
 
 1. Clona el repositorio oficial de Eigen:
-   ```bash
-   git clone https://gitlab.com/libeigen/eigen.git
-   ```
+    ```bash
+    git clone https://gitlab.com/libeigen/eigen.git
+    ```
 Luego, se puede incluir el directorio eigen en tu proyecto o apuntar a él en tu compilador.
 
 2. Descarga desde la página oficial:
